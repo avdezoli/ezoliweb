@@ -137,7 +137,6 @@ askscan:
             echo $lblue . $bold . "\n[iNFO] " . $green ,"IP adrres: " . $green . $wip . "\n" . $cln;
             echo $bold . $lblue . "[iNFO] " . $green ,"Web Server: ";
             WEBserver($reallink);
-            echo "\n";
             echo $lblue . $bold . "\n[iNFO] " . $green ,"Cloudflare: ";
             cloudflaredetect($lwwww);
             echo $lblue . $bold . "[iNFO] " . $green ,"Robots File: " , "\e[92m" . robotsdottxt($reallink) . $cln;
