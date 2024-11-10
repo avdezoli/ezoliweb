@@ -49,6 +49,7 @@ function ezoli_banner(){
           █████╗    ███╔╝ ██║   ██║██║     ██║        ██║ █╗ ██║█████╗  ██████╔╝
           ██╔══╝   ███╔╝  ██║   ██║██║     ██║        ██║███╗██║██╔══╝  ██╔══██╗
           ███████╗███████╗╚██████╔╝███████╗██║        ╚███╔███╔╝███████╗██████╔╝
+          ╚══════╝╚══════╝ ╚═════╝ ╚══════╝╚═╝         ╚══╝╚══╝ ╚══════╝╚═════╝
 
 
 \e[32m";
@@ -59,13 +60,15 @@ system("clear");
 ezoli_banner();
 
 echo "\n";
-echo $yellow . " [1]  Web Scan and  Attacking\n$yellow [2]  IP Adress System\n$red [Q]  Quit! \n\n" . $cln;
+echo $yellow . " [1]  Web Scan and Attacking\n$yellow [2]  IP Adress System\n$red [Q]  Quit! \n\n" . $cln;
 userinput("Choose Any Scan OR Action From The Above List");
 $start = trim(fgets(STDIN, 1024));
 
 if (!in_array($start, array(
   '1',
-  '2'
+  '2',
+  'Q',
+  'q'
 ), true))
 {
   echo $bold . $red . "\n[!] Invalid Input! Please Enter a Valid Option! \n\n" . $cln;
@@ -108,24 +111,25 @@ else {
           {
             $ipsl = "http://";
           }
-    scanlist:
-    
+          
         system("clear");
+      askscan:
         echo $bold . $blue . "
           +--------------------------------------------------------------+
           +                  List Of Scans Or Actions                    +
           +--------------------------------------------------------------+
-    
+          
                 $lblue Scanning Site : " . $fgreen . $ipsl . $ip . $blue . "
           \n\n";
-        echo $yellow . " [1]  Start Scanning\n$yellow [2]  Dos Attack \n$red [Q]  Quit! \n\n" . $cln;
-    askscan:
+        echo $yellow . " [1]  Start Scanning\n$yellow [2]  Dos Attack \n$yellow [3]  Brute-force Attack \n$red [Q]  Quit! \n\n" . $cln;
         userinput("Choose Any Scan OR Action From The Above List");
         $scan = trim(fgets(STDIN, 1024));
-    
+        
         if (!in_array($scan, array(
             '1',
-            '2'
+            '2',
+            '3',
+            'Q'
         ), true))
           {
             echo $bold . $red . "\n[!] Invalid Input! Please Enter a Valid Option! \n\n" . $cln;
@@ -160,36 +164,175 @@ else {
                 echo "\n\n";
                 echo $bold . $yellow . "[*] Scanning Complete. Press Enter To Continue OR CTRL + C To Stop\n\n";
                 trim(fgets(STDIN, 1024));
-                goto scanlist;
+                goto askscan;
               }
               elseif ($scan == "2")
               {
                 echo $bold . $lblue . "Website URL: " . $fgreen ;
                 $url = trim(fgets(STDIN));
-    
+                
                 echo $bold . $lblue . "Enter 1 For HTTP OR Enter 2 For HTTPS: ". $fgreen ;
                 $cevap1 = trim(fgets(STDIN));
-    
+                
                 echo $bold . $lblue . "How many threads: ". $fgreen ;
                 $sayı = trim(fgets(STDIN));
-    
+                
                 echo $bold . $lblue . "Delay interval: ". $fgreen ;
                 $slep = trim(fgets(STDIN));
-    
+                
                 echo $bold . $lblue . "Do you have proxy (n or 12.34.56.78:8000): ". $fgreen ;
                 $proxy = trim(fgets(STDIN));
-    
-                $command = "python3 dos.py " . escapeshellarg($url) . " " . escapeshellarg($cevap1) . " " . escapeshellarg($sayı) . " " . escapeshellarg($slep) . " " . escapeshellarg($proxy);
-    
+                
+                $command = "python3 py/dos.py " . escapeshellarg($url) . " " . escapeshellarg($cevap1) . " " . escapeshellarg($sayı) . " " . escapeshellarg($slep) . " " . escapeshellarg($proxy);
+                
                 $output = [];
                 $return_var = 0;
                 exec($command, $output, $return_var);
-    
+                
                 if ($return_var !== 0) {
                     echo "?" . implode("\n", $output);
                 } else {
                     echo "!\n";
                     echo implode("\n", $output);
+                }
+                goto askscan;
+              }
+              elseif ($scan == "3")
+              {
+              askattack:
+                echo "\n";
+                echo $yellow . " [1]  Create Password Text \n$yellow [2]  Start Brute Force \n$yellow [3]  Take HTML Code \n$red [Q]  Quit! \n\n" . $cln;
+                userinput("Choose Any Scan OR Action From The Above List");
+                $attack1 = trim(fgets(STDIN, 1024));
+                
+                if (!in_array($attack1, array(
+                  '1',
+                  '2',
+                  '3',
+                  'Q'
+                ), true))
+                  {
+                    echo $bold . $red . "\n[!] Invalid Input! Please Enter a Valid Option! \n\n" . $cln;
+                    goto askattack;
+                  }
+                else
+                {
+                  if ($attack1 == "1"){
+
+                    $p0 = "-i";
+
+                    echo $bold . $lblue . "First Name: " . $fgreen ;
+                    $p1 = trim(fgets(STDIN));
+
+                    echo $bold . $lblue . "Second Name: ". $fgreen ;
+                    $p2 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Surname: ". $fgreen ;
+                    $p3 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Birthdate (DDMMYYYY): ". $fgreen ;
+                    $p4 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Nickname: ". $fgreen ;
+                    $p5 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Partners Name: ". $fgreen ;
+                    $p6 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Partners Birtdate (DDMMYYYY): ". $fgreen ;
+                    $p7 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Child's Name: ". $fgreen ;
+                    $p8 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Child's Nickname: ". $fgreen ;
+                    $p9 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Child's Birtdate (DDMMYYYY): ". $fgreen ;
+                    $p10 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Pet's Name: ". $fgreen ;
+                    $p11 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Company Name: ". $fgreen ;
+                    $p12 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Special Words: ". $fgreen ;
+                    $p13 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Get Output (y/n): ". $fgreen ;
+                    $p14 = trim(fgets(STDIN));
+                
+                    $command = "python3 py/cupp.py" . " " . escapeshellarg($p0) . " " . escapeshellarg($p1) . " " . escapeshellarg($p2) . " " . escapeshellarg($p3) . " " . escapeshellarg($p4) . " " . escapeshellarg($p5) . " " . escapeshellarg($p6) . " " . escapeshellarg($p7) . " " . escapeshellarg($p8) . " " . escapeshellarg($p9) . " " . escapeshellarg($p10) . " " . escapeshellarg($p11) . " " . escapeshellarg($p12) . " " . escapeshellarg($p13) . " " . escapeshellarg($p14);
+                
+                    $output = [];
+                    $return_var = 0;
+                    exec($command, $output, $return_var);
+                
+                    if ($return_var !== 0) {
+                        echo "?" . implode("\n", $output);
+                    } else {
+                        echo "!\n";
+                        echo implode("\n", $output);
+                    }
+                    goto askattack;
+                  }
+                  elseif ($attack1 == "2"){
+
+                    echo $bold . $lblue . "Url (With https or https): " . $fgreen ;
+                    $p1 = trim(fgets(STDIN));
+
+                    echo $bold . $lblue . "Usurname: ". $fgreen ;
+                    $p2 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Password: ". $fgreen ;
+                    $p3 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Form Usurname ID: ". $fgreen ;
+                    $p4 = trim(fgets(STDIN));
+                
+                    echo $bold . $lblue . "Form Password ID: ". $fgreen ;
+                    $p5 = trim(fgets(STDIN));
+
+                    $command = "python3 py/force.py" . " " . escapeshellarg($p1) . " " . escapeshellarg($p2) . " " . escapeshellarg($p3) . " " . escapeshellarg($p4) . " " . escapeshellarg($p5);
+                
+                    $output = [];
+                    $return_var = 0;
+                    exec($command, $output, $return_var);
+                
+                    if ($return_var !== 0) {
+                        echo "?" . implode("\n", $output);
+                    } else {
+                        echo "!\n";
+                        echo implode("\n", $output);
+                    }
+                    goto askattack;
+                  }
+                  elseif ($attack1 == "3"){
+
+                    echo $bold . $lblue . "Url: " . $fgreen ;
+                    $p1 = trim(fgets(STDIN));
+
+                    echo $bold . $lblue . "Enter 1 For HTTP OR Enter 2 For HTTPS: " . $fgreen ;
+                    $p2 = trim(fgets(STDIN));
+
+                    $command = "python3 py/html.py" . " " . escapeshellarg($p1) . " " . escapeshellarg($p2);
+                
+                    $output = [];
+                    $return_var = 0;
+                    exec($command, $output, $return_var);
+                
+                    if ($return_var !== 0) {
+                        echo "?" . implode("\n", $output);
+                    } else {
+                        echo "!\n";
+                        echo implode("\n", $output);
+                    goto askattack;
+                  }
+                  }
+                  elseif ($attack1 == "Q"){
+                    goto askscan;
+                  }
                 }
               }
             }
@@ -197,22 +340,23 @@ else {
     
   }
   elseif ($start == "2"){
+    askip:
     echo "\n";
     echo $yellow . " [1]  IP tester\n$yellow [2]  Port tester\n$red [Q]  Quit! \n\n" . $cln;
     userinput("Choose Any Scan OR Action From The Above List");
     $start1 = trim(fgets(STDIN, 1024));
-
+    
     if ($start1 == "1"){
-      $pythonFilePath = 'ip.py';
-
+      $pythonFilePath = 'py/ip.py';
+      
       $descriptorspec = [
         0 => ["pipe", "r"],
         1 => ["pipe", "w"],
         2 => ["pipe", "w"]
       ];
-  
+      
       $process = proc_open("python3 " . escapeshellarg($pythonFilePath), $descriptorspec, $pipes);
-  
+      
       if (is_resource($process)) {
         echo "\n";
         echo $yellow . $bold . " [1] Find your IP\n";
@@ -224,15 +368,15 @@ else {
         $userInput = trim( fgets(STDIN));
         fwrite($pipes[0], $userInput . PHP_EOL);
         fclose($pipes[0]);
-  
+        
         $output = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
-  
+        
         $error = stream_get_contents($pipes[2]);
         fclose($pipes[2]);
-  
+        
         proc_close($process);
-  
+        
       if ($output) {
           echo "!\n" . $output;
       }
@@ -242,31 +386,36 @@ else {
       } else {
         echo "Süreç başlatılamadı.";
       }
+      goto askip;
     }
     
     
     elseif ($start1 == "2"){
       echo $bold . $lblue . "Enter the IP address to scan: " . $fgreen ;
       $port = trim(fgets(STDIN));
-    
+      
       echo $bold . $lblue . "Enter the start port: ". $fgreen ;
       $first = trim(fgets(STDIN));
-    
+      
       echo $bold . $lblue . "Enter the end port: ". $fgreen ;
       $last = trim(fgets(STDIN));
-    
-      $command = "python3 port.py " . escapeshellarg($port) . " " . escapeshellarg($first) . " " . escapeshellarg($last);
-    
+      
+      $command = "python3 py/port.py " . escapeshellarg($port) . " " . escapeshellarg($first) . " " . escapeshellarg($last);
+      
       $output = [];
       $return_var = 0;
       exec($command, $output, $return_var);
-    
+      
       if ($return_var !== 0) {
         echo "?" . implode("\n", $output);
       } else {
         echo "!\n";
         echo implode("\n", $output);
       }
+      goto askip;
+    }
+    elseif ($attack1 == "Q"){
+      goto askscan;
     }
   }
 }
