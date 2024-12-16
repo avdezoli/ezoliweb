@@ -1,8 +1,9 @@
-# EZOLI_DDOS
+# EZOLİ_WEB
 ## SETUP
 ```
-git clone https://github.com/avdezoli/ezoliweb
-cd ezoliweb
-php e_web.php
+git clone https://github.com/avdezoli/ezoli
+cd ezoli
+bash setup
 chmod +x e_web
+./e_web
 ```
